@@ -1,0 +1,103 @@
+# Program that can let you play tic tac toe
+
+# Make a grid or place to play
+grid = ["-", "-", "-",
+        "-", "-", "-",
+        "-", "-", "-"]
+
+player = "X"
+winner = None
+gameRunning = True
+
+# Visual representation of the play space or grid
+def printgrid(grid):
+    print("  " + grid[0] + " | " + grid[1] + " | " + grid[2])
+    print("-------------")
+    print("  " + grid[3] + " | " + grid[4] + " | " + grid[5])
+    print("-------------")
+    print("  " + grid[6] + " | " + grid[7] + " | " + grid[8])
+
+
+# Detect player input
+def playerinput(grid):
+    while True:
+        if player == "X":
+            inp = int(input("Player (X) please choose a number between 1-9 as represented in the grid: "))
+        else:
+            inp = int(input("Player (O) please choose a number between 1-9 as represented in the grid: "))
+        if inp >= 1 and inp <= 9 and grid[inp-1] == "-":
+            grid[inp-1] = player
+            break
+        else:
+            if player == "X":
+                print("Failure. Try agin Player (X)")
+            else:
+                print("Failure. Try agin Player (O)")
+            printgrid(grid)
+
+
+# Check whether there is a tie or winner
+def checkplaceHorizontal(grid):
+    global winner
+    if grid[0] == grid[1] == grid[2] and grid[0] != "-":
+        winner = grid[0]
+        return True
+    elif grid[3] == grid[4] == grid[5] and grid[3] != "-":
+        winner = grid[3]
+        return True
+    elif grid[6] == grid[7] == grid[8] and grid[6] != "-":
+        winner = grid[6]
+        return True
+
+def checkplaceVertical(grid):
+    global winner
+    if grid[0] == grid[3] == grid[6] and grid[0] != "-":
+        winner = grid[0]
+        return True
+    elif grid[1] == grid[4] == grid[7] and grid[1] != "-":
+        winner = grid[1]
+        return True
+    elif grid[2] == grid[5] == grid[8] and grid[2] != "-":
+        winner = grid[2]
+        return True
+
+def checkplaceDiagonal(grid):
+    global winner
+    if grid[0] == grid[4] == grid[8] and grid[0] != "-":
+        winner = grid[0]
+        return True
+    elif grid[2] == grid[4] == grid[6] and grid[2] != "-":
+        winner = grid[2]
+        return True
+
+# Switching of players
+def switchplayer():
+    global player
+    if player == "X":
+        player = "O"
+    else:
+        player = "X"
+
+# Determining the Tie and Win
+def checktie(grid):
+    global gameRunning
+    if "-" not in grid:
+        printgrid(grid)
+        print("Game Finished. Tie!")
+        gameRunning = False
+
+def checkwinner():
+    global gameRunning
+    if checkplaceDiagonal(grid) or checkplaceVertical(grid) or checkplaceHorizontal(grid):
+        print(f"Winner is {winner}!!!!!!")
+
+# Check to see whether game is functioning whilst running
+while gameRunning:
+    printgrid(grid)
+    if winner != None:
+        break
+    playerinput(grid)
+    checkwinner()
+    checktie(grid)
+    switchplayer()
+
