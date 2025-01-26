@@ -15,7 +15,7 @@ gameRunning = True
 mode = None
 
 # Visual representation of the play space or grid
-def printgrid(grid):
+def print_grid(grid):
     print("  " + grid[0] + " | " + grid[1] + " | " + grid[2])
     print("-------------")
     print("  " + grid[3] + " | " + grid[4] + " | " + grid[5])
@@ -38,7 +38,7 @@ def playerinput(grid):
                 print("Failure. Try agin Player (X)")
             else:
                 print("Failure. Try agin Player (O)")
-            printgrid(grid)
+            print_grid(grid)
 
 
 # Check whether there is a tie or winner
@@ -86,8 +86,8 @@ def switchplayer():
 # Determining the Tie and Win
 def checktie(grid):
     global gameRunning
-    if "-" not in grid:
-        printgrid(grid)
+    if "-" not in grid and winner is None:
+        print_grid(grid)
         print("Game Finished. Tie!")
         gameRunning = False
 
@@ -114,11 +114,12 @@ def bot_moves(grid):
 # Check to see whether game is functioning whilst running
 mode_select()
 while gameRunning:
-    printgrid(grid)
-    if winner != None:
-        break
+    print_grid(grid)
 
     checkwinner()
+    if winner is not None:
+        break
+
     checktie(grid)
 
     if mode == "1": # Player vs Player
