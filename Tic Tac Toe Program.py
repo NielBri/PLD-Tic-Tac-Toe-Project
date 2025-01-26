@@ -13,11 +13,12 @@ player = "X"
 winner = None
 game_running = True
 mode = None
+tie = False
 
 # Player Score Checking
 player_x_wins = 0
 player_o_wins = 0
-ties = 0
+ties_counter = 0
 
 # Visual representation of the play space or grid
 def print_grid(grid):
@@ -58,6 +59,7 @@ def check_place_horizontal(grid):
     elif grid[6] == grid[7] == grid[8] and grid[6] != "-":
         winner = grid[6]
         return True
+    return False
 
 def check_place_vertical(grid):
     global winner
@@ -90,13 +92,14 @@ def switch_player():
 
 # Determining the Tie and Win
 def check_tie(grid):
+    global ties_counter
     global game_running
-    global ties
     if "-" not in grid and winner is None:
-        print_grid(grid)
         print("Game Finished. Tie!")
-        ties += 1
+        ties_counter += 1
         game_running = False
+
+
 
 def check_winner():
     global game_running
@@ -145,6 +148,9 @@ while True:
             break
 
         check_tie(grid)
+        if not game_running:  # If the game ended in a tie, exit the loop
+            break
+
 
         if mode == "1": # Player vs Player
             player_input(grid)
@@ -159,11 +165,12 @@ while True:
 
         switch_player()
 
+
     # Player Scores!
     print("Scores")
     print("Player X wins: ", player_x_wins)
     print("Player O wins: ", player_o_wins)
-    print("Ties: ", ties)
+    print("Ties: ", ties_counter)
 
     play_again = input("Do you want to play again? (yes/no): ").lower()
     if play_again != "yes":
