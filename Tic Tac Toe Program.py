@@ -127,27 +127,33 @@ def bot_moves(grid):
 
 # Check to see whether game is functioning whilst running
 mode_select()
-while gameRunning:
-    print_grid(grid)
+while True:
+    while gameRunning:
+        print_grid(grid)
 
-    checkwinner()
-    if winner is not None:
-        break
+        checkwinner()
+        if winner is not None:
+            break
 
-    checktie(grid)
+        checktie(grid)
 
-    if mode == "1": # Player vs Player
-        playerinput(grid)
-    elif mode == "2":  # Player vs Bot
-        if player == "X":
+        if mode == "1": # Player vs Player
             playerinput(grid)
-        else:
-            bot_moves(grid)
+        elif mode == "2":  # Player vs Bot
+            if player == "X":
+                playerinput(grid)
+            else:
+                bot_moves(grid)
 
-    switchplayer()
+        switchplayer()
 
-# Player Scores!
-print("Scores")
-print("Player X wins: ", player_x_wins)
-print("Player O wins: ", player_o_wins)
-print("Ties: ", ties)
+    # Player Scores!
+    print("Scores")
+    print("Player X wins: ", player_x_wins)
+    print("Player O wins: ", player_o_wins)
+    print("Ties: ", ties)
+
+    play_again = input("Do you want to play again? (yes/no): ").lower()
+    if play_again != "yes":
+        print("Thanks for playing!")
+        break
