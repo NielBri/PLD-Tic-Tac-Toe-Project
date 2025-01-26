@@ -11,7 +11,7 @@ grid = ["-", "-", "-",
 
 player = "X"
 winner = None
-gameRunning = True
+game_running = True
 mode = None
 
 # Player Score Checking
@@ -29,7 +29,7 @@ def print_grid(grid):
 
 
 # Detect player input
-def playerinput(grid):
+def player_input(grid):
     while True:
         if player == "X":
             inp = int(input("Player (X) please choose a number between 1-9 as represented in the grid: "))
@@ -47,7 +47,7 @@ def playerinput(grid):
 
 
 # Check whether there is a tie or winner
-def checkplaceHorizontal(grid):
+def check_place_horizontal(grid):
     global winner
     if grid[0] == grid[1] == grid[2] and grid[0] != "-":
         winner = grid[0]
@@ -59,7 +59,7 @@ def checkplaceHorizontal(grid):
         winner = grid[6]
         return True
 
-def checkplaceVertical(grid):
+def check_place_vertical(grid):
     global winner
     if grid[0] == grid[3] == grid[6] and grid[0] != "-":
         winner = grid[0]
@@ -71,7 +71,7 @@ def checkplaceVertical(grid):
         winner = grid[2]
         return True
 
-def checkplaceDiagonal(grid):
+def check_place_diagonal(grid):
     global winner
     if grid[0] == grid[4] == grid[8] and grid[0] != "-":
         winner = grid[0]
@@ -81,7 +81,7 @@ def checkplaceDiagonal(grid):
         return True
 
 # Switching of players
-def switchplayer():
+def switch_player():
     global player
     if player == "X":
         player = "O"
@@ -89,21 +89,21 @@ def switchplayer():
         player = "X"
 
 # Determining the Tie and Win
-def checktie(grid):
-    global gameRunning
+def check_tie(grid):
+    global game_running
     global ties
     if "-" not in grid and winner is None:
         print_grid(grid)
         print("Game Finished. Tie!")
         ties += 1
-        gameRunning = False
+        game_running = False
 
-def checkwinner():
-    global gameRunning
+def check_winner():
+    global game_running
     global player_o_wins
     global player_x_wins
 
-    if checkplaceDiagonal(grid) or checkplaceVertical(grid) or checkplaceHorizontal(grid):
+    if check_place_diagonal(grid) or check_place_vertical(grid) or check_place_horizontal(grid):
         print(f"Winner is {winner}!!!!!!")
         if winner == "X":
             player_x_wins += 1
@@ -135,26 +135,26 @@ while True:
 
     player = "X"
     winner = None
-    gameRunning = True
+    game_running = True
 
-    while gameRunning:
+    while game_running:
         print_grid(grid)
 
-        checkwinner()
+        check_winner()
         if winner is not None:
             break
 
-        checktie(grid)
+        check_tie(grid)
 
         if mode == "1": # Player vs Player
-            playerinput(grid)
+            player_input(grid)
         elif mode == "2":  # Player vs Bot
             if player == "X":
-                playerinput(grid)
+                player_input(grid)
             else:
                 bot_moves(grid)
 
-        switchplayer()
+        switch_player()
 
     # Player Scores!
     print("Scores")
