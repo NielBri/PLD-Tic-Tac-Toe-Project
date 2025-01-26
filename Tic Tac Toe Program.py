@@ -1,6 +1,7 @@
 # Program that can let you play tic tac toe
 
 # Put the random function for the ai to use
+
 import random
 
 # Make a grid or place to play
@@ -11,6 +12,7 @@ grid = ["-", "-", "-",
 player = "X"
 winner = None
 gameRunning = True
+mode = None
 
 # Visual representation of the play space or grid
 def printgrid(grid):
@@ -94,7 +96,17 @@ def checkwinner():
     if checkplaceDiagonal(grid) or checkplaceVertical(grid) or checkplaceHorizontal(grid):
         print(f"Winner is {winner}!!!!!!")
 
+def mode_select():
+    global mode
+    print("Please select game mode:")
+    print("1. Player vs Player")
+    print("2. Player vs AI")
+    mode = input("Enter 1 or 2: ")
+
+
+
 # Check to see whether game is functioning whilst running
+mode_select()
 while gameRunning:
     printgrid(grid)
     if winner != None:
