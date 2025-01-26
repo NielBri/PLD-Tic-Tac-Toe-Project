@@ -118,7 +118,10 @@ while gameRunning:
     if winner != None:
         break
 
-    if mode == "1":
+    checkwinner()
+    checktie(grid)
+
+    if mode == "1": # Player vs Player
         playerinput(grid)
     elif mode == "2":  # Player vs Bot
         if player == "X":
@@ -126,7 +129,5 @@ while gameRunning:
         else:
             bot_moves(grid)
 
-    checkwinner()
-    checktie(grid)
     switchplayer()
 
