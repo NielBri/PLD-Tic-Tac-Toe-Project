@@ -128,6 +128,15 @@ def bot_moves(grid):
 # Check to see whether game is functioning whilst running
 mode_select()
 while True:
+    # Add a mechanism that resets the board
+    grid = ["-", "-", "-",
+            "-", "-", "-",
+            "-", "-", "-"]
+
+    player = "X"
+    winner = None
+    gameRunning = True
+
     while gameRunning:
         print_grid(grid)
 
