@@ -103,6 +103,12 @@ def mode_select():
     print("2. Player vs AI")
     mode = input("Enter 1 or 2: ")
 
+# Add AI for the game
+def bot_moves(grid):
+    print("Bot has made a move!")
+    possible_moves = [i for i in range(len(grid)) if grid[i] == "-"]
+    move = random.choice(possible_moves)
+    grid[move] = player
 
 
 # Check to see whether game is functioning whilst running
