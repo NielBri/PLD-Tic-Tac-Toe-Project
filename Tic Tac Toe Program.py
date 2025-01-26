@@ -14,6 +14,11 @@ winner = None
 gameRunning = True
 mode = None
 
+# Player Score Checking
+player_x_wins = 0
+player_o_wins = 0
+ties = 0
+
 # Visual representation of the play space or grid
 def print_grid(grid):
     print("  " + grid[0] + " | " + grid[1] + " | " + grid[2])
@@ -86,15 +91,24 @@ def switchplayer():
 # Determining the Tie and Win
 def checktie(grid):
     global gameRunning
+    global ties
     if "-" not in grid and winner is None:
         print_grid(grid)
         print("Game Finished. Tie!")
+        ties += 1
         gameRunning = False
 
 def checkwinner():
     global gameRunning
+    global player_o_wins
+    global player_x_wins
+
     if checkplaceDiagonal(grid) or checkplaceVertical(grid) or checkplaceHorizontal(grid):
         print(f"Winner is {winner}!!!!!!")
+        if winner == "X":
+            player_x_wins += 1
+        elif winner == "O":
+            player_o_wins += 1
 
 def mode_select():
     global mode
@@ -132,3 +146,8 @@ while gameRunning:
 
     switchplayer()
 
+# Player Scores!
+print("Scores")
+print("Player X wins: ", player_x_wins)
+print("Player O wins: ", player_o_wins)
+print("Ties: ", ties)
