@@ -1,5 +1,8 @@
 # Program that can let you play tic tac toe
 
+# Put the random function for the ai to use
+import random
+
 # Make a grid or place to play
 grid = ["-", "-", "-",
         "-", "-", "-",
