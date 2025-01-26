@@ -153,6 +153,9 @@ while True:
                 player_input(grid)
             else:
                 bot_moves(grid)
+        else:
+            print("Try again")
+            mode_select()
 
         switch_player()
 
